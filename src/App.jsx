@@ -22,7 +22,7 @@ function App () {
       return person.number === newNumber
     })
 
-    formValidations(newNumber, newName, person, number)
+    if (formValidations(newNumber, newName, person, number)) return
 
     setPersons([...persons, { name: newName, number: newNumber }])
     setNewName('')
