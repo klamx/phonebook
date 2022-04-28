@@ -1,13 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Form from './components/Form/Form'
 import Contacts from './components/Contacts/Contacts'
 import Filter from './components/Filter/Filter'
 import formValidations from './helpers/formValidations'
+import axios from 'axios'
 
 function App () {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: '123' }
-  ])
+  const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [search, setSearch] = useState('')
@@ -47,6 +46,12 @@ function App () {
         person.name.toLowerCase().includes(search.toLowerCase())
       )
       : persons
+
+  useEffect(() => {
+    axios('http://localhost:3001/persons').then(({ data }) => {
+      setPersons(data)
+    })
+  }, [])
 
   return (
     <div>
