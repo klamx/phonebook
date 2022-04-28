@@ -48,7 +48,11 @@ function App () {
       : persons
 
   useEffect(() => {
-    axios('http://localhost:3001/persons').then(({ data }) => {
+    const getData = async () => {
+      const data = await axios('http://localhost:3001/persons')
+      return data
+    }
+    getData().then(({ data }) => {
       setPersons(data)
     })
   }, [])
